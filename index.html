@@ -677,6 +677,31 @@
     .svc-row .svc-tags { display: none; }
   }
 
+  /* Service floating preview */
+  .svc-preview {
+    position: fixed;
+    width: 260px;
+    aspect-ratio: 4/3;
+    border-radius: 18px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transform: scale(0.92) rotate(-2deg);
+    transition: opacity .22s ease, transform .25s ease;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(110,226,255,0.15);
+    will-change: transform, opacity;
+  }
+  .svc-preview.visible {
+    opacity: 1;
+    transform: scale(1) rotate(-1.5deg);
+  }
+  .svc-preview img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   /* ============== STEPS — orbital ============== */
   .steps-frame {
     position: relative;
@@ -1117,7 +1142,7 @@
         <span>[ Edition 2.0 / Performance ]</span>
         <span>São Paulo • Brasil</span>
       </div>
-      <div class="live"><span class="ld"></span>Operando agora — 04 maio 2026</div>
+      <div class="live"><span class="ld"></span>Operando agora — <span id="hero-date"></span></div>
     </div>
 
     <div class="hero-head">
@@ -1303,42 +1328,45 @@
     </div>
 
     <div class="svc-list reveal">
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k2.jpg">
         <span class="svc-num">/01</span>
         <span class="svc-title"><span class="grad-text">Posicionamento</span> nas buscas do Google</span>
         <span class="svc-tags"><span>Google Ads</span><span>SEO</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k1.jpg">
         <span class="svc-num">/02</span>
         <span class="svc-title">Meta Ads <span class="it">Facebook & Instagram</span></span>
         <span class="svc-tags"><span>Tráfego</span><span>Remarketing</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k4.jpg">
         <span class="svc-num">/03</span>
         <span class="svc-title"><span class="grad-text">Design</span> & Web, Social Media, Branding</span>
         <span class="svc-tags"><span>Identidade</span><span>UI</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k3.jpg">
         <span class="svc-num">/04</span>
         <span class="svc-title"><span class="grad-text">Copywriting</span> persuasivo & CRO</span>
         <span class="svc-tags"><span>Landing</span><span>Anúncios</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k2.jpg">
         <span class="svc-num">/05</span>
         <span class="svc-title">Funis de vendas <span class="it">& automação</span></span>
         <span class="svc-tags"><span>E-mail</span><span>WhatsApp</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
-      <a href="#" class="svc-row" data-svc>
+      <a href="#" class="svc-row" data-svc data-preview="uploads/k1.jpg">
         <span class="svc-num">/06</span>
         <span class="svc-title"><span class="grad-text">Analytics</span> e relatórios estratégicos</span>
         <span class="svc-tags"><span>Dashboards</span><span>BI</span></span>
         <span class="svc-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round"/></svg></span>
       </a>
+    </div>
+    <div class="svc-preview" id="svc-preview" aria-hidden="true">
+      <img src="" alt="" id="svc-preview-img"/>
     </div>
   </div>
 </section>
@@ -1672,11 +1700,42 @@
     });
   });
 
-  // Service rows: light follows mouse
+  // Dynamic date in hero
+  const heroDate = document.getElementById('hero-date');
+  if (heroDate) {
+    const now = new Date();
+    heroDate.textContent = now.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  // Service rows: light follows mouse + floating preview
+  const preview = document.getElementById('svc-preview');
+  const previewImg = document.getElementById('svc-preview-img');
+  let raf;
+
   document.querySelectorAll('.svc-row').forEach(row => {
     row.addEventListener('mousemove', (e) => {
       const r = row.getBoundingClientRect();
       row.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+
+      if (preview && previewImg) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          preview.style.left = (e.clientX + 28) + 'px';
+          preview.style.top  = (e.clientY - 80) + 'px';
+        });
+      }
+    });
+
+    row.addEventListener('mouseenter', () => {
+      if (!preview || !previewImg) return;
+      const src = row.dataset.preview;
+      if (!src) return;
+      previewImg.src = src;
+      preview.classList.add('visible');
+    });
+
+    row.addEventListener('mouseleave', () => {
+      if (preview) preview.classList.remove('visible');
     });
   });
 </script>
