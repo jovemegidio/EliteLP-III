@@ -152,9 +152,19 @@ section { position: relative; }
 .hero-note { font-size: 13px; color: var(--text-3); margin-top: 14px; display: flex; align-items: center; gap: 8px; }
 
 .hero-visual { position: relative; }
-.hero-img-wrap { border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; box-shadow: 0 24px 64px rgba(28,25,23,0.12); background: #111; }
+.hero-img-wrap { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; box-shadow: 0 24px 64px rgba(28,25,23,0.12); background: #111; }
 .hero-img-wrap img,
 .hero-img-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; background: #111; }
+.video-audio-toggle {
+  position: absolute; right: 18px; bottom: 18px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 0; border-radius: 999px; padding: 11px 15px;
+  background: rgba(255,255,255,0.96); color: var(--text);
+  font: 700 13px/1 'Inter', sans-serif; cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+}
+.video-audio-toggle svg { width: 17px; height: 17px; flex: none; }
+.video-audio-toggle:hover { background: #fff; transform: translateY(-1px); }
 .hero-float {
   position: absolute; bottom: 24px; left: -28px;
   background: rgba(255,255,255,0.97); border: 1px solid var(--border); border-radius: 16px;
@@ -541,6 +551,14 @@ section { position: relative; }
             <source src="uploads/video.mov" type="video/quicktime" />
             <img src="uploads/photo-montage-dkOk5fZJ.jpg" alt="Fotos restauradas pela Elite Company" />
           </video>
+          <button class="video-audio-toggle" type="button" aria-label="Ativar audio do video" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+              <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+            </svg>
+            <span>Ativar som</span>
+          </button>
         </div>
         <div class="hero-float">
           <div class="fi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
@@ -968,6 +986,31 @@ section { position: relative; }
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = '0'; });
       if (!isOpen) { item.classList.add('open'); item.querySelector('.faq-a').style.maxHeight = item.querySelector('.faq-a').scrollHeight + 'px'; }
+    });
+  });
+
+  document.querySelectorAll('.video-audio-toggle').forEach(btn => {
+    const wrap = btn.closest('.hero-img-wrap');
+    const video = wrap ? wrap.querySelector('video') : null;
+    const label = btn.querySelector('span');
+
+    if (!video) return;
+
+    btn.addEventListener('click', async () => {
+      const shouldEnableAudio = video.muted || video.volume === 0;
+      video.muted = !shouldEnableAudio;
+      video.volume = shouldEnableAudio ? 1 : 0;
+      btn.setAttribute('aria-pressed', String(shouldEnableAudio));
+      if (label) label.textContent = shouldEnableAudio ? 'Silenciar' : 'Ativar som';
+
+      try {
+        await video.play();
+      } catch (error) {
+        video.muted = true;
+        video.volume = 0;
+        btn.setAttribute('aria-pressed', 'false');
+        if (label) label.textContent = 'Ativar som';
+      }
     });
   });
 </script>
