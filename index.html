@@ -198,7 +198,9 @@ section { position: relative; }
 .ba-card { border-radius: var(--radius); overflow: hidden; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(28,25,23,0.06); }
 .ba-images { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
 .ba-img { aspect-ratio: 3/4; overflow: hidden; background: var(--bg-3); }
-.ba-img img { width: 100%; height: 100%; object-fit: contain; }
+.ba-img img { width: 100%; height: 100%; object-fit: cover; }
+.ba-img.before-img img { object-position: left center; }
+.ba-img.after-img img { object-position: right center; }
 .ba-sep { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 34px; height: 34px; background: var(--surface); border: 2px solid var(--border-2); border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--text-2); z-index: 2; box-shadow: 0 2px 12px rgba(28,25,23,0.14); }
 .ba-labels { display: grid; grid-template-columns: 1fr 1fr; padding: 10px 14px; }
 .ba-labels span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
@@ -210,7 +212,7 @@ section { position: relative; }
 
 /* Carousel gallery */
 .photo-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 48px; }
-.photo-gallery img { border-radius: var(--radius-sm); aspect-ratio: 1/1; object-fit: contain; background: var(--bg-3); width: 100%; box-shadow: 0 4px 16px rgba(28,25,23,0.08); transition: transform .2s; }
+.photo-gallery img { border-radius: var(--radius-sm); aspect-ratio: 451/293; object-fit: cover; background: var(--bg-3); width: 100%; box-shadow: 0 4px 16px rgba(28,25,23,0.08); transition: transform .2s; }
 .photo-gallery img:hover { transform: scale(1.03); }
 @media (max-width: 840px) { .photo-gallery { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 500px) { .photo-gallery { grid-template-columns: repeat(2, 1fr); } }
@@ -579,24 +581,24 @@ section { position: relative; }
     <div class="ba-grid">
       <div class="ba-card">
         <div class="ba-images">
-          <div class="ba-img"><img src="uploads/pricing-high-damage-qLvcYmws.jpg" alt="Foto muito danificada — antes" /></div>
-          <div class="ba-img"><img src="uploads/carousel-1-nq6qdr2i.png" alt="Foto restaurada — depois" /></div>
+          <div class="ba-img before-img"><img src="uploads/carousel-1-nq6qdr2i.png" alt="Foto muito danificada — antes" /></div>
+          <div class="ba-img after-img"><img src="uploads/carousel-1-nq6qdr2i.png" alt="Foto restaurada — depois" /></div>
           <div class="ba-sep">↔</div>
         </div>
         <div class="ba-labels"><span class="before">Antes</span><span class="after">Depois <svg><use href="#icon-check"></use></svg></span></div>
       </div>
       <div class="ba-card">
         <div class="ba-images">
-          <div class="ba-img"><img src="uploads/pricing-medium-damage-m2r_5LUF.jpg" alt="Foto danificada — antes" /></div>
-          <div class="ba-img"><img src="uploads/carousel-2-CUzlPpk_.png" alt="Foto restaurada — depois" /></div>
+          <div class="ba-img before-img"><img src="uploads/carousel-2-CUzlPpk_.png" alt="Foto danificada — antes" /></div>
+          <div class="ba-img after-img"><img src="uploads/carousel-2-CUzlPpk_.png" alt="Foto restaurada — depois" /></div>
           <div class="ba-sep">↔</div>
         </div>
         <div class="ba-labels"><span class="before">Antes</span><span class="after">Depois <svg><use href="#icon-check"></use></svg></span></div>
       </div>
       <div class="ba-card">
         <div class="ba-images">
-          <div class="ba-img"><img src="uploads/pricing-low-damage-XyovlITd.jpg" alt="Foto com baixa qualidade — antes" /></div>
-          <div class="ba-img"><img src="uploads/carousel-3-DdMGUL_R.png" alt="Foto restaurada — depois" /></div>
+          <div class="ba-img before-img"><img src="uploads/carousel-3-DdMGUL_R.png" alt="Foto com baixa qualidade — antes" /></div>
+          <div class="ba-img after-img"><img src="uploads/carousel-3-DdMGUL_R.png" alt="Foto restaurada — depois" /></div>
           <div class="ba-sep">↔</div>
         </div>
         <div class="ba-labels"><span class="before">Antes</span><span class="after">Depois <svg><use href="#icon-check"></use></svg></span></div>
