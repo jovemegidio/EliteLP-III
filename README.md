@@ -113,14 +113,14 @@ A página posiciona o **Método Elite Performance** da agência — foco em estr
 
 ## Personalização
 
-**Número do WhatsApp** — substitua `5511999999999` pelo número real (DDD + número, apenas dígitos):
+**Número do WhatsApp** — substitua `5511990157500` pelo número real (DDD + número, apenas dígitos):
 
 ```bash
 # macOS / Linux
-sed -i 's/5511999999999/SEU_NUMERO/g' index.html
+sed -i 's/5511990157500/SEU_NUMERO/g' index.html
 
 # Windows PowerShell
-(Get-Content index.html) -replace '5511999999999','SEU_NUMERO' | Set-Content index.html
+(Get-Content index.html) -replace '5511990157500','SEU_NUMERO' | Set-Content index.html
 ```
 
 ---
