@@ -1,10 +1,18 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W6XZX296');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Restaurar Fotos Antigas | Elite Company — a partir de R$30</title>
 <meta name="description" content="Especialistas em restaurar fotos antigas e transformar lembranças apagadas pelo tempo em imagens e vídeos nítidos e vivos. A partir de R$30. Envie pelo WhatsApp." />
+<base href="/restaurarfotos/" />
 <link rel="icon" type="image/png" href="Favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -153,8 +161,8 @@ section { position: relative; }
 
 .hero-visual { position: relative; }
 .hero-img-wrap { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; box-shadow: 0 24px 64px rgba(28,25,23,0.12); background: #111; }
-.hero-img-wrap img,
-.hero-img-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; background: #111; }
+.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-img-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .video-audio-toggle {
   position: absolute; right: 18px; bottom: 18px; z-index: 2;
   display: inline-flex; align-items: center; gap: 8px;
@@ -165,22 +173,24 @@ section { position: relative; }
 }
 .video-audio-toggle svg { width: 17px; height: 17px; flex: none; }
 .video-audio-toggle:hover { background: #fff; transform: translateY(-1px); }
+@keyframes badgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 .hero-float {
   position: absolute; bottom: 24px; left: -28px;
-  background: rgba(255,255,255,0.97); border: 1px solid var(--border); border-radius: 16px;
-  padding: 14px 18px; display: flex; align-items: center; gap: 12px;
-  box-shadow: 0 8px 32px rgba(28,25,23,0.1);
+  background: rgba(255,255,255,0.98); border: 1px solid var(--border); border-radius: 18px;
+  padding: 14px 18px; display: flex; align-items: center; gap: 13px;
+  box-shadow: 0 12px 44px rgba(28,25,23,0.14), 0 2px 8px rgba(28,25,23,0.06);
+  animation: badgeFloat 3.5s ease-in-out infinite;
 }
-.hero-float .fi { width: 42px; height: 42px; border-radius: 11px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); display: grid; place-items: center; flex: none; color: #fff; }
-.hero-float .fi svg { width: 20px; height: 20px; }
-.hero-float .fl { font-size: 11px; color: var(--text-3); font-weight: 500; }
-.hero-float .fv { font-size: 16px; font-weight: 700; color: var(--text); margin-top: 2px; }
+.hero-float .fi { width: 46px; height: 46px; border-radius: 13px; background: linear-gradient(135deg, #F59E0B 0%, #C2810A 100%); display: grid; place-items: center; flex: none; color: #fff; box-shadow: 0 6px 20px rgba(194,129,10,0.45); }
+.hero-float .fi svg { width: 22px; height: 22px; }
+.hero-float .fl { font-size: 10px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; }
+.hero-float .fv { font-size: 15px; font-weight: 700; color: var(--text); margin-top: 3px; }
 
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .hero-visual { order: -1; }
-  .hero-img-wrap { aspect-ratio: 3/2; }
-  .hero-float { left: 12px; bottom: 16px; }
+  .hero-img-wrap { aspect-ratio: 4/5; }
+  .hero-float { left: 14px; bottom: 16px; }
 }
 
 /* ===================================================
@@ -268,7 +278,7 @@ section { position: relative; }
   object-fit: cover;
   display: block;
 }
-@media (max-width: 900px) { .anim-inner { grid-template-columns: 1fr; } .anim-visual { aspect-ratio: 16/9; max-height: none; } }
+@media (max-width: 900px) { .anim-inner { grid-template-columns: 1fr; } .anim-visual { aspect-ratio: 9/16; max-height: 520px; margin: 0 auto; } }
 
 /* ===================================================
    EMOTIONAL
@@ -425,9 +435,163 @@ section { position: relative; }
 .fade-up.d1 { animation-delay: .12s; }
 .fade-up.d2 { animation-delay: .24s; }
 .fade-up.d3 { animation-delay: .38s; }
+
+/* ===================================================
+   MOBILE — ≤ 768px (tablets e celulares)
+=================================================== */
+@media (max-width: 768px) {
+  /* Top bar */
+  .top-bar { font-size: 12px; padding: 9px 16px; line-height: 1.5; }
+
+  /* Header */
+  .site-header { padding: 11px 0; }
+  .logo img { height: 36px; }
+  .nav .btn { font-size: 13px; padding: 10px 16px; gap: 7px; }
+  .nav .btn svg { width: 15px; height: 15px; }
+
+  /* Hero imagem — proporção mais alta no mobile */
+  .hero-img-wrap { aspect-ratio: 4/5; }
+
+  /* Seção: Proof CTA */
+  .proof-cta .btn-lg { width: 100%; justify-content: center; }
+
+  /* Seção: Animação */
+  .anim-copy .btn-lg { width: 100%; justify-content: center; }
+
+  /* Seção: Emocional */
+  .emotional-copy .btn-lg { width: 100%; justify-content: center; }
+
+  /* Seção: Urgência */
+  .urgency-inner { flex-direction: column; text-align: center; gap: 20px; }
+  .urgency-inner .btn { width: 100%; justify-content: center; }
+
+  /* Botões btn-xl (Pricing, Final CTA) */
+  .btn-xl { font-size: 16px; padding: 17px 28px; width: 100%; justify-content: center; }
+
+  /* Final CTA */
+  .final-cta > .container > p { font-size: 16px; }
+
+  /* Seções: espaçamentos */
+  .section-pad { padding: 72px 0; }
+  .section-pad-sm { padding: 48px 0; }
+}
+
+/* ===================================================
+   MOBILE — ≤ 480px (celulares pequenos)
+=================================================== */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+
+  /* Top bar */
+  .top-bar { font-size: 11px; padding: 8px 14px; }
+
+  /* Header */
+  .site-header { padding: 10px 0; }
+  .logo img { height: 30px; }
+  .nav .btn { font-size: 12px; padding: 9px 13px; gap: 6px; }
+  .nav .btn svg { width: 14px; height: 14px; }
+
+  /* Hero */
+  .hero { padding: 32px 0 48px; }
+  .hero-inner { gap: 28px; }
+  .hero-img-wrap { aspect-ratio: 3/4; }
+  .hero-sub { font-size: 15px; margin-bottom: 22px; }
+  .hero-cta-group { align-items: stretch; }
+  .hero-note { font-size: 12px; }
+  .btn-lg { font-size: 15px; padding: 16px 18px; width: 100%; justify-content: center; }
+
+  /* Hero float badge */
+  .hero-float { left: 10px; bottom: 12px; padding: 10px 13px; gap: 10px; border-radius: 14px; animation: none; }
+  .hero-float .fi { width: 36px; height: 36px; border-radius: 10px; box-shadow: none; }
+  .hero-float .fi svg { width: 18px; height: 18px; }
+  .hero-float .fl { font-size: 9px; }
+  .hero-float .fv { font-size: 13px; }
+
+  /* Audio toggle */
+  .video-audio-toggle { padding: 8px 11px; font-size: 12px; right: 10px; bottom: 10px; }
+  .video-audio-toggle svg { width: 14px; height: 14px; }
+  .video-audio-toggle span { display: none; }
+
+  /* Seções */
+  .section-pad { padding: 56px 0; }
+  .section-pad-sm { padding: 36px 0; }
+
+  /* Stats */
+  .stats-bar { padding: 28px 0; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stat { border-right: none; padding: 0; }
+
+  /* Before/after */
+  .ba-grid { grid-template-columns: 1fr; }
+
+  /* Gallery */
+  .photo-gallery { grid-template-columns: repeat(2, 1fr); }
+
+  /* Testimonials */
+  .testimonials { grid-template-columns: 1fr; }
+  .tcard { padding: 24px 20px; }
+  .tcard p { font-size: 16px; }
+
+  /* Anim section */
+  .anim-inner { gap: 32px; }
+  .anim-visual { max-height: 420px; }
+  .anim-copy h2 { font-size: clamp(26px, 7vw, 36px); }
+  .anim-list li { font-size: 15px; }
+
+  /* Emotional */
+  .emotional-inner { gap: 32px; }
+  .emotional-copy h2 { font-size: clamp(24px, 7vw, 34px); }
+  .ei-card { padding: 14px 16px; }
+
+  /* Services */
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: 26px 22px; }
+
+  /* Pricing */
+  .pricing-tiers { grid-template-columns: 1fr; }
+  .btn-xl { font-size: 15px; padding: 16px 18px; }
+
+  /* Steps */
+  .steps-grid { grid-template-columns: 1fr; }
+  .step { padding: 20px 16px; }
+
+  /* Urgency */
+  .urgency-inner { flex-direction: column; text-align: center; gap: 20px; }
+  .urgency-inner .btn { width: 100%; justify-content: center; }
+  .urgency-copy h3 { font-size: 20px; }
+
+  /* FAQ */
+  .faq-q { font-size: 14px; padding: 17px 18px; }
+  .faq-a p { padding: 0 18px 18px; }
+
+  /* Footer */
+  .footer-links { flex-direction: column; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+
+  /* WhatsApp float */
+  .wpp-float { width: 50px; height: 50px; bottom: 16px; right: 16px; }
+}
+
+/* ===================================================
+   MOBILE — ≤ 360px (telas muito pequenas)
+=================================================== */
+@media (max-width: 360px) {
+  .container { padding: 0 12px; }
+  .hero { padding: 24px 0 40px; }
+  .hero-img-wrap { aspect-ratio: 1/1; }
+  .hero-float { left: 6px; bottom: 8px; }
+  .nav .btn span:not(.sr-only) { display: none; }
+  .nav .btn { padding: 9px; border-radius: 50%; }
+  .nav .btn svg { width: 18px; height: 18px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6XZX296"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <symbol id="icon-heart" viewBox="0 0 24 24">
     <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -561,7 +725,7 @@ section { position: relative; }
           </button>
         </div>
         <div class="hero-float">
-          <div class="fi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
+          <div class="fi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
           <div>
             <div class="fl">Restauração</div>
             <div class="fv">100% Satisfação</div>
@@ -989,27 +1153,50 @@ section { position: relative; }
     });
   });
 
-  document.querySelectorAll('.video-audio-toggle').forEach(btn => {
-    const wrap = btn.closest('.hero-img-wrap');
-    const video = wrap ? wrap.querySelector('video') : null;
-    const label = btn.querySelector('span');
+  const SVG_SOUND_ON  = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path>';
+  const SVG_SOUND_OFF = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
 
+  function setAudioState(btn, video, on) {
+    const label = btn.querySelector('span');
+    const svgEl  = btn.querySelector('svg');
+    video.muted  = !on;
+    video.volume = on ? 0.75 : 0;
+    btn.setAttribute('aria-pressed', String(on));
+    if (label) label.textContent = on ? 'Silenciar' : 'Ativar som';
+    if (svgEl)  svgEl.innerHTML  = on ? SVG_SOUND_ON : SVG_SOUND_OFF;
+  }
+
+  document.querySelectorAll('.video-audio-toggle').forEach(btn => {
+    const wrap  = btn.closest('.hero-img-wrap');
+    const video = wrap ? wrap.querySelector('video') : null;
     if (!video) return;
 
-    btn.addEventListener('click', async () => {
-      const shouldEnableAudio = video.muted || video.volume === 0;
-      video.muted = !shouldEnableAudio;
-      video.volume = shouldEnableAudio ? 1 : 0;
-      btn.setAttribute('aria-pressed', String(shouldEnableAudio));
-      if (label) label.textContent = shouldEnableAudio ? 'Silenciar' : 'Ativar som';
-
+    /* Tenta autoplay com som logo após o vídeo estar pronto */
+    const tryUnmute = async () => {
+      video.muted  = false;
+      video.volume = 0.75;
       try {
         await video.play();
-      } catch (error) {
+        setAudioState(btn, video, true);
+      } catch (_) {
+        /* Browser bloqueou — fica mudo mas mostra botão para ativar */
         video.muted = true;
-        video.volume = 0;
-        btn.setAttribute('aria-pressed', 'false');
-        if (label) label.textContent = 'Ativar som';
+        setAudioState(btn, video, false);
+      }
+    };
+
+    if (video.readyState >= 2) {
+      tryUnmute();
+    } else {
+      video.addEventListener('canplay', tryUnmute, { once: true });
+    }
+
+    /* Botão toggle mudo / com som */
+    btn.addEventListener('click', async () => {
+      const willEnableSound = video.muted || video.volume === 0;
+      setAudioState(btn, video, willEnableSound);
+      try { await video.play(); } catch (_) {
+        setAudioState(btn, video, false);
       }
     });
   });
